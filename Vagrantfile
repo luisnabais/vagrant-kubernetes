@@ -5,7 +5,6 @@ Vagrant.configure("2") do |config|
   config.vm.define "kube-master" do |subconfig|
     subconfig.vm.box = BOX_IMAGE
     subconfig.vm.hostname = "master"
-    #subconfig.vm.network :private_network, ip: "10.0.0.10"
     subconfig.vm.network :private_network, ip: "172.28.128.50"
   end
   
@@ -16,10 +15,6 @@ Vagrant.configure("2") do |config|
       subconfig.vm.network :private_network, ip: "172.28.128.#{i + 50}"
     end
   end
-
-  #config.vm.provision "shell", inline: <<-SHELL
-    #sudo um -y install vim 
-  #SHELL
 
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "provision/playbook.yml"
